@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "npm run build && npm --prefix server install",
+  "buildCommand": "npm --prefix client run build",
   "installCommand": "npm install && npm --prefix server install && npm --prefix client install",
-  "startCommand": "npm --prefix server start",
   "env": {
     "MONGODB_URI": "@mongodb_uri",
     "JWT_SECRET": "@jwt_secret",
     "NODE_ENV": "production"
+  },
+  "functions": {
+    "api/**": {
+      "runtime": "nodejs24.x"
+    }
   }
 }

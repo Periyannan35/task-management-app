@@ -4,11 +4,16 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
 import taskRoutes from './routes/tasks.js';
 import { errorHandler } from './middleware/auth.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const httpServer = createServer(app);
@@ -16,6 +21,7 @@ const io = new Server(httpServer, { cors: { origin: '*' } });
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 mongoose.connect(process.env.MONGODB_URI).then(() => console.log('MongoDB connected')).catch(err => console.error('DB error:', err));
 
@@ -25,6 +31,10 @@ app.use('/api/tasks', taskRoutes);
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
   socket.on('disconnect', () => console.log('User disconnected:', socket.id));
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 app.use(errorHandler);

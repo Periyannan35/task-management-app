@@ -142,6 +142,21 @@ Set these on your hosting platform:
 - `JWT_SECRET` - A strong random secret
 - `NODE_ENV=production`
 
+## Live Deployment
+
+The app has been deployed to Vercel for demo purposes. Note: if no MongoDB URI is configured the frontend uses a browser localStorage mock for auth and tasks.
+
+- Production URL: https://task-management-mdzsc6x9q-periyannan35s-projects.vercel.app
+- Alias: https://task-management-alpha-azure.vercel.app
+
+To enable a real backend (persistent database and JWT auth), set the following in your Vercel project settings and redeploy:
+
+```
+MONGODB_URI=<your MongoDB Atlas connection string>
+JWT_SECRET=<strong_random_secret>
+NODE_ENV=production
+```
+
 ## License
 
 MIT

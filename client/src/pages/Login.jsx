@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { loginUser } from '../services/api';
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, onToggle }) {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
@@ -50,6 +50,9 @@ export default function Login({ onLogin }) {
         >
           Login
         </button>
+        <div className="text-center mt-4">
+          <button type="button" onClick={onToggle} className="text-sm text-blue-500 hover:underline">Don't have an account? Register</button>
+        </div>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { registerUser } from '../services/api';
 
-export default function Register({ onRegister }) {
+export default function Register({ onRegister, onToggle }) {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
 
@@ -59,6 +59,9 @@ export default function Register({ onRegister }) {
         >
           Register
         </button>
+        <div className="text-center mt-4">
+          <button type="button" onClick={onToggle} className="text-sm text-blue-500 hover:underline">Already have an account? Login</button>
+        </div>
       </form>
     </div>
   );

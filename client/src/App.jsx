@@ -37,27 +37,11 @@ export default function App() {
   if (!user) {
     return showRegister ? (
       <div>
-        <Register onRegister={handleRegister} />
-        <div className="text-center mt-4">
-          <button
-            onClick={() => setShowRegister(false)}
-            className="text-blue-500 hover:text-blue-700"
-          >
-            Already have an account? Login
-          </button>
-        </div>
+        <Register onRegister={handleRegister} onToggle={() => setShowRegister(false)} />
       </div>
     ) : (
       <div>
-        <Login onLogin={handleLogin} />
-        <div className="text-center mt-4">
-          <button
-            onClick={() => setShowRegister(true)}
-            className="text-blue-500 hover:text-blue-700"
-          >
-            Don't have an account? Register
-          </button>
-        </div>
+        <Login onLogin={handleLogin} onToggle={() => setShowRegister(true)} />
       </div>
     );
   }
